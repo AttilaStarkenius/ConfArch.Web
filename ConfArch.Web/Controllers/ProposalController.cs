@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
 using ConfArch.Data.Models;
 using ConfArch.Data.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConfArch.Web.Controllers
 {
+    [Authorize]
     public class ProposalController: Controller
     {
         private readonly IConferenceRepository conferenceRepo;
@@ -16,6 +18,7 @@ namespace ConfArch.Web.Controllers
             this.proposalRepo = proposalRepo;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index(int conferenceId)
         {
             var conference = await conferenceRepo.GetById(conferenceId);      
